@@ -39,6 +39,9 @@
         function redraw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 			
+			//For text style
+			ctx.font = "10px Verdana";
+			
 			var keys = Object.keys(draws);
 			
 			for(var i = 0; i < keys.length; i++)
@@ -55,6 +58,7 @@
 				ctx.strokeStyle = drawCall.color;
 				ctx.lineWidth = 3;
 				ctx.strokeRect(drawCall.x, drawCall.y, drawCall.width, drawCall.height);
+				ctx.fillText(drawCall.name,drawCall.x + 5 ,drawCall.y - 10);
 			}
 			
         }
@@ -96,7 +100,7 @@
 			
 			function setUp(){
 				var time = new Date().getTime();
-				draws[user] = {lastUpdate: time, x: x, y: y, width: 50, height: 50, color: "black"};
+				draws[user] = {lastUpdate: time, x: x, y: y, width: 50, height: 50, color: "black", name: user};
 			}
 			
 			//HandleMessage function
@@ -105,7 +109,7 @@
 				//If draws at index data.name is null add data, else update data
 				if( !draws[data.name] )
 				{
-					draws[data.name] = {lastUpdate: data.lastUpdate, x: data.x, y: data.y, width: 50, height: 50, color: "red"};
+					draws[data.name] = {lastUpdate: data.lastUpdate, x: data.x, y: data.y, width: 50, height: 50, color: "red", name: data.name};
 				}
 				else
 				{
